@@ -9,7 +9,7 @@ Use this skill when the user wants to prepare, review, or use a project-agnostic
 
 ## Core Rule
 
-Do not produce a full framework by guessing, and do not start by writing design documents. First act like a product manager: explore existing material, interview the user with high-impact questions, clarify goals, users, scenarios, rules, boundaries, and acceptance criteria, then persist the confirmed requirements locally. Only after requirements are clear enough should you write or refine design documents. Implementation is allowed only after the project has an explicit module sequence and the current module has a complete module design, task card, context pack, and acceptance test entry point.
+Do not produce a full framework by guessing, and do not start by writing design documents. First act like a product manager: explore existing material, interview the user with high-impact questions, clarify goals, users, scenarios, rules, boundaries, and acceptance criteria, then persist the confirmed requirements locally. This is an active discovery loop, not a one-time question list: after each user answer, restate what changed, identify the most important remaining gaps, and ask the next 1-3 questions. Only after requirements are clear enough should you write or refine design documents. Implementation is allowed only after the project has an explicit module sequence and the current module has a complete module design, task card, context pack, and acceptance test entry point.
 
 Coding must follow the module sequence. Implement exactly one module at a time, run that module's acceptance tests, fix failures, update the docs if the implementation changes meaning, and only then move to the next module. If a module cannot be tested, stop and create or clarify the test entry point before continuing.
 
@@ -30,19 +30,28 @@ All project documents created by this skill must be written in Chinese by defaul
 3. Run product-manager discovery before writing design docs:
    - Ask about product intent, users, roles, core scenarios, non-goals, business rules, state lifecycle, errors, acceptance criteria, and tradeoffs.
    - Ask at most 1-3 key questions at a time.
-   - Continue the conversation until you can accurately restate the requirements and identify any remaining non-blocking assumptions.
+   - Treat discovery as iterative. After each user response, summarize confirmed facts, name the remaining gaps, and ask the next 1-3 highest-impact questions.
+   - Do not stop discovery after one round unless the project is trivial or the user explicitly says the requirements are complete.
+   - In Plan mode, do not only propose a plan. Use the plan to drive requirements discovery, and request more user input when product or business details are missing.
+   - Continue the conversation until you satisfy the Requirements Discovery Gate below.
    - Persist important interview notes to `docs/requirements/DISCOVERY_LOG.md`.
    - Persist confirmed, stable requirements to `docs/requirements/PRODUCT_REQUIREMENTS.md`.
    - Do not generate the full `PROJECT_DESIGN.md` until confirmed requirements are saved locally or the file records explicit assumptions that let work continue.
-4. Ask only high-impact questions:
+4. Requirements Discovery Gate:
+   - You can restate the product goal, target users, primary workflows, and explicit non-goals.
+   - Core business rules, permissions, state/lifecycle, error cases, and acceptance criteria are either confirmed or listed as open questions.
+   - Major tradeoffs and risky assumptions are visible to the user.
+   - The user has either confirmed the restatement, or the remaining unknowns are documented as non-blocking assumptions in local requirement files.
+   - If any gate item is not satisfied, ask another focused round of questions instead of moving to design or implementation.
+5. Ask only high-impact questions:
    - Ask about product intent, business rules, public contracts, module boundaries, tests, and tradeoffs.
    - Ask at most 1-3 key questions at a time.
    - Put unresolved but non-blocking assumptions into `Assumptions` or `Open Questions`.
-5. Check conflicts before planning or implementation:
+6. Check conflicts before planning or implementation:
    - If the user request conflicts with existing docs, contracts, architecture, task scope, or quality rules, pause.
    - List the conflict, source document, impact, options, and recommendation.
    - Let the user choose. Do not silently override docs or independently reject the request.
-6. Build documents progressively:
+7. Build documents progressively:
    - Requirements discovery log and confirmed product requirements first.
    - Global project design first.
    - Business-domain module designs next.
@@ -51,7 +60,7 @@ All project documents created by this skill must be written in Chinese by defaul
    - Task cards and context packs next.
    - Quality and decision records as they become relevant.
    - Write all generated project documents in Chinese by default.
-7. Before implementation, verify the Document Gate:
+8. Before implementation, verify the Document Gate:
    - `AGENTS.md` exists or is drafted.
    - `docs/requirements/PRODUCT_REQUIREMENTS.md` exists or is drafted and contains the confirmed requirements relevant to the current work.
    - `docs/design/PROJECT_DESIGN.md` exists or is drafted.
@@ -60,8 +69,8 @@ All project documents created by this skill must be written in Chinese by defaul
    - `docs/TASKS.md` contains the ordered module queue and task card for the current module.
    - `docs/QUALITY.md` defines the test command or verification scenario for the current module.
    - The current module has a context pack.
-8. Implement only after the Document Gate passes for the current module.
-9. Follow the Module Acceptance Gate after each module:
+9. Implement only after the Document Gate passes for the current module.
+10. Follow the Module Acceptance Gate after each module:
    - Run the module acceptance tests.
    - Fix failures inside the module boundary.
    - Record any contract, architecture, or quality doc updates.

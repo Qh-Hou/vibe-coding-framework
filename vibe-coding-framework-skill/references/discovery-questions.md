@@ -2,7 +2,34 @@
 
 Use these questions selectively. Do not ask them mechanically. Ask only questions that materially affect design, contracts, module boundaries, testing, or implementation.
 
-Start discovery as a product manager, not as a document generator. Ask 1-3 questions at a time, restate what you learned, and persist stable answers to `docs/requirements/PRODUCT_REQUIREMENTS.md`. Use `docs/requirements/DISCOVERY_LOG.md` for interview notes, unresolved ambiguity, and why a question mattered.
+Start discovery as a product manager, not as a document generator. Ask 1-3 questions at a time, restate what you learned, name the most important remaining gaps, then ask the next focused round. Persist stable answers to `docs/requirements/PRODUCT_REQUIREMENTS.md`. Use `docs/requirements/DISCOVERY_LOG.md` for interview notes, unresolved ambiguity, and why a question mattered.
+
+## Discovery Loop
+
+Use this loop for every new or unclear project, including Plan mode:
+
+1. Explore existing files before asking.
+2. Ask 1-3 high-impact product questions.
+3. After the user answers, restate confirmed facts in your own words.
+4. Identify which requirement areas are still unclear.
+5. Ask the next 1-3 questions, ordered by risk and design impact.
+6. Repeat until the Requirements Discovery Gate is satisfied.
+7. Save confirmed requirements locally before writing full design docs.
+
+Do not treat a single answer from the user as enough unless it already covers goals, users, workflows, non-goals, business rules, acceptance criteria, and risky tradeoffs.
+
+## Requirements Discovery Gate
+
+Discovery is ready to move into design only when these are clear or explicitly documented as non-blocking assumptions:
+
+- Product goal and success criteria.
+- Target users, roles, callers, and permissions.
+- Primary workflows and important alternate/error flows.
+- Non-goals and out-of-scope behaviors.
+- Core business rules and data/state lifecycle.
+- External integrations or public contracts.
+- Acceptance criteria and minimum test/verification expectations.
+- Important risks, tradeoffs, and open questions.
 
 ## Project Goal
 
