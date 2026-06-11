@@ -12,6 +12,8 @@ Use after implementation or when reviewing another agent's work.
 
 ## Documentation
 
+- Did confirmed product requirements change? If yes, was `docs/requirements/PRODUCT_REQUIREMENTS.md` updated?
+- Did discovery reveal important unresolved context? If yes, was `docs/requirements/DISCOVERY_LOG.md` updated?
 - Did business semantics change? If yes, was the module design updated?
 - Did code boundaries change? If yes, was architecture mapping updated?
 - Did acceptance criteria change? If yes, was quality or task documentation updated?

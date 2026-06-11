@@ -2,6 +2,8 @@
 
 Use these questions selectively. Do not ask them mechanically. Ask only questions that materially affect design, contracts, module boundaries, testing, or implementation.
 
+Start discovery as a product manager, not as a document generator. Ask 1-3 questions at a time, restate what you learned, and persist stable answers to `docs/requirements/PRODUCT_REQUIREMENTS.md`. Use `docs/requirements/DISCOVERY_LOG.md` for interview notes, unresolved ambiguity, and why a question mattered.
+
 ## Project Goal
 
 - What user or business problem must this system solve?
