@@ -13,6 +13,14 @@ Use task cards to hand work to an agent or subagent without giving it the whole 
 
 <Domain name from module design docs.>
 
+## Module Sequence
+
+- Previous module: <name or none>
+- Current module: <name>
+- Next module: <name or none>
+- Start condition: <what must be true before this module starts>
+- Completion condition: <tests or scenario that must pass before the next module starts>
+
 ## Context Pack
 
 <docs/context-packs/<name>.md>
@@ -47,6 +55,13 @@ Use task cards to hand work to an agent or subagent without giving it the whole 
 - <test command or scenario>
 - <test command or scenario>
 
+## Module Gate
+
+- Required docs exist and are current: <yes/no>
+- Module boundary is clear in `docs/ARCHITECTURE.md`: <yes/no>
+- Acceptance entry point is runnable: <yes/no>
+- Next module is blocked until this task passes: <yes/no>
+
 ## Out of Scope
 
 - <explicitly excluded behavior>
@@ -62,4 +77,4 @@ Use task cards to hand work to an agent or subagent without giving it the whole 
 - <yes/no, and why>
 ```
 
-A task is not ready if it lacks allowed modifications, forbidden modifications, acceptance tests, or a context pack.
+A task is not ready if it lacks allowed modifications, forbidden modifications, acceptance tests, a context pack, or a module sequence entry.

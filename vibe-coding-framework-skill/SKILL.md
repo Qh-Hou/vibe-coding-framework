@@ -9,7 +9,9 @@ Use this skill when the user wants to prepare, review, or use a project-agnostic
 
 ## Core Rule
 
-Do not produce a full framework by guessing. Work interactively: explore first, ask high-impact questions, resolve conflicts, then write or refine documents incrementally. During implementation, work on one business domain or one explicit business slice at a time and run the relevant tests.
+Do not produce a full framework by guessing, and do not start coding before the required documents exist. Work interactively: explore first, ask high-impact questions, resolve conflicts, then write or refine documents incrementally. Implementation is allowed only after the project has an explicit module sequence and the current module has a complete module design, task card, context pack, and acceptance test entry point.
+
+Coding must follow the module sequence. Implement exactly one module at a time, run that module's acceptance tests, fix failures, update the docs if the implementation changes meaning, and only then move to the next module. If a module cannot be tested, stop and create or clarify the test entry point before continuing.
 
 ## Workflow
 
@@ -34,9 +36,23 @@ Do not produce a full framework by guessing. Work interactively: explore first, 
    - Global project design first.
    - Business-domain module designs next.
    - Architecture mapping next.
+   - Module implementation sequence next.
    - Task cards and context packs next.
    - Quality and decision records as they become relevant.
-6. Implement only after the current business domain has enough design, contract, task, context, and test information.
+6. Before implementation, verify the Document Gate:
+   - `AGENTS.md` exists or is drafted.
+   - `docs/design/PROJECT_DESIGN.md` exists or is drafted.
+   - Each planned module has `docs/design/modules/<domain>.md`.
+   - `docs/ARCHITECTURE.md` maps modules to code boundaries.
+   - `docs/TASKS.md` contains the ordered module queue and task card for the current module.
+   - `docs/QUALITY.md` defines the test command or verification scenario for the current module.
+   - The current module has a context pack.
+7. Implement only after the Document Gate passes for the current module.
+8. Follow the Module Acceptance Gate after each module:
+   - Run the module acceptance tests.
+   - Fix failures inside the module boundary.
+   - Record any contract, architecture, or quality doc updates.
+   - Do not start the next module until the current module passes or the user explicitly accepts a documented exception.
 
 ## When to Read References
 
@@ -51,10 +67,12 @@ Do not produce a full framework by guessing. Work interactively: explore first, 
 
 ## Implementation Mode Rules
 
+- Documents first, code second. If the required design, architecture, task, quality, and context documents are missing, create or complete them before editing product code.
+- Implementation order comes from the module queue in `docs/TASKS.md`. Do not skip ahead unless the user changes the queue.
 - One business domain or one explicit business slice per implementation pass.
 - No context pack, no implementation.
 - Read only the context pack and referenced docs, not the entire design corpus by default.
 - Confirm or add tests before implementation.
-- Run the domain-level acceptance tests after implementation.
+- Run the domain-level acceptance tests after implementation and do not proceed to another module until they pass.
 - Upgrade cross-domain changes to contract changes and request main-agent/user review.
 - Report changes, tests, risks, contract changes, and remaining open questions.
