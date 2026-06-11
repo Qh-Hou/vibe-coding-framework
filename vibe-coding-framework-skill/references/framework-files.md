@@ -2,6 +2,10 @@
 
 This reference explains the document system for a project using the vibe coding framework.
 
+## Language Rule
+
+All human-facing project documents created from this framework should be written in Chinese by default. Keep file paths, commands, API names, schema fields, code identifiers, and external protocol names unchanged, but write the actual headings, explanations, rules, task cards, context packs, assumptions, risks, and decision records in Chinese unless the user explicitly asks for another language.
+
 ## `AGENTS.md`
 
 Purpose: AI execution discipline and hard rules.
@@ -19,11 +23,48 @@ Does not contain:
 - Module-level design.
 - Long templates.
 
+## `docs/requirements/DISCOVERY_LOG.md`
+
+Purpose: product-manager discovery notes and interview trail.
+
+Contains:
+- Interview date or round.
+- User intent and original wording summarized in Chinese.
+- Agent understanding and restatement.
+- Confirmed requirements from that round.
+- Open questions and unresolved assumptions.
+- Conflicts, tradeoffs, and next questions.
+
+Does not contain:
+- Final architecture decisions.
+- Full module design.
+- Implementation details unless they materially constrain requirements.
+
+## `docs/requirements/PRODUCT_REQUIREMENTS.md`
+
+Purpose: confirmed product requirements source of truth before design documents are created.
+
+Contains:
+- Product goal and non-goals.
+- Users, roles, callers, and external systems.
+- Core scenarios and user flows.
+- Functional requirements.
+- Non-functional requirements.
+- Business rules and constraints.
+- Acceptance criteria.
+- Open questions, assumptions, and requirement change log.
+
+Does not contain:
+- Long interview transcript.
+- Code boundary mapping.
+- Task-level implementation instructions.
+
 ## `docs/design/PROJECT_DESIGN.md`
 
 Purpose: global project design and index.
 
 Contains:
+- Link to `docs/requirements/PRODUCT_REQUIREMENTS.md`.
 - Goals and non-goals.
 - Users, callers, and external systems.
 - Core workflow overview.
@@ -71,6 +112,7 @@ Purpose: task cards and subagent division.
 Each task card must state:
 - Goal.
 - Business domain.
+- Product requirement references.
 - Context pack.
 - Allowed modifications.
 - Forbidden modifications.
@@ -110,4 +152,4 @@ Each record should include:
 
 Purpose: precise context entry point for a task or domain.
 
-Context packs should index, not duplicate, large docs. They list the exact sections, contracts, and tests an agent must read for the task.
+Context packs should index, not duplicate, large docs. They list the exact requirement sections, design sections, contracts, and tests an agent must read for the task.

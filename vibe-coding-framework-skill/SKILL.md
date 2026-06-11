@@ -9,13 +9,16 @@ Use this skill when the user wants to prepare, review, or use a project-agnostic
 
 ## Core Rule
 
-Do not produce a full framework by guessing, and do not start coding before the required documents exist. Work interactively: explore first, ask high-impact questions, resolve conflicts, then write or refine documents incrementally. Implementation is allowed only after the project has an explicit module sequence and the current module has a complete module design, task card, context pack, and acceptance test entry point.
+Do not produce a full framework by guessing, and do not start by writing design documents. First act like a product manager: explore existing material, interview the user with high-impact questions, clarify goals, users, scenarios, rules, boundaries, and acceptance criteria, then persist the confirmed requirements locally. Only after requirements are clear enough should you write or refine design documents. Implementation is allowed only after the project has an explicit module sequence and the current module has a complete module design, task card, context pack, and acceptance test entry point.
 
 Coding must follow the module sequence. Implement exactly one module at a time, run that module's acceptance tests, fix failures, update the docs if the implementation changes meaning, and only then move to the next module. If a module cannot be tested, stop and create or clarify the test entry point before continuing.
+
+All project documents created by this skill must be written in Chinese by default so human collaborators can read and maintain them easily. Keep file names and stable technical identifiers in their conventional form, but write headings, explanations, task cards, context packs, assumptions, conflict reports, and delivery notes in Chinese unless the user explicitly requests another language.
 
 ## Workflow
 
 1. Identify the mode:
+   - Product-manager requirements discovery for a new or unclear project.
    - Create a new framework for a project.
    - Review an existing framework.
    - Add or improve a module design document.
@@ -24,31 +27,41 @@ Coding must follow the module sequence. Implement exactly one module at a time, 
 2. Explore before asking:
    - In an existing repo, inspect README, AGENTS, design docs, task docs, architecture docs, tests, and directory structure.
    - Do not ask questions that can be answered from the repository.
-3. Ask only high-impact questions:
+3. Run product-manager discovery before writing design docs:
+   - Ask about product intent, users, roles, core scenarios, non-goals, business rules, state lifecycle, errors, acceptance criteria, and tradeoffs.
+   - Ask at most 1-3 key questions at a time.
+   - Continue the conversation until you can accurately restate the requirements and identify any remaining non-blocking assumptions.
+   - Persist important interview notes to `docs/requirements/DISCOVERY_LOG.md`.
+   - Persist confirmed, stable requirements to `docs/requirements/PRODUCT_REQUIREMENTS.md`.
+   - Do not generate the full `PROJECT_DESIGN.md` until confirmed requirements are saved locally or the file records explicit assumptions that let work continue.
+4. Ask only high-impact questions:
    - Ask about product intent, business rules, public contracts, module boundaries, tests, and tradeoffs.
    - Ask at most 1-3 key questions at a time.
    - Put unresolved but non-blocking assumptions into `Assumptions` or `Open Questions`.
-4. Check conflicts before planning or implementation:
+5. Check conflicts before planning or implementation:
    - If the user request conflicts with existing docs, contracts, architecture, task scope, or quality rules, pause.
    - List the conflict, source document, impact, options, and recommendation.
    - Let the user choose. Do not silently override docs or independently reject the request.
-5. Build documents progressively:
+6. Build documents progressively:
+   - Requirements discovery log and confirmed product requirements first.
    - Global project design first.
    - Business-domain module designs next.
    - Architecture mapping next.
    - Module implementation sequence next.
    - Task cards and context packs next.
    - Quality and decision records as they become relevant.
-6. Before implementation, verify the Document Gate:
+   - Write all generated project documents in Chinese by default.
+7. Before implementation, verify the Document Gate:
    - `AGENTS.md` exists or is drafted.
+   - `docs/requirements/PRODUCT_REQUIREMENTS.md` exists or is drafted and contains the confirmed requirements relevant to the current work.
    - `docs/design/PROJECT_DESIGN.md` exists or is drafted.
    - Each planned module has `docs/design/modules/<domain>.md`.
    - `docs/ARCHITECTURE.md` maps modules to code boundaries.
    - `docs/TASKS.md` contains the ordered module queue and task card for the current module.
    - `docs/QUALITY.md` defines the test command or verification scenario for the current module.
    - The current module has a context pack.
-7. Implement only after the Document Gate passes for the current module.
-8. Follow the Module Acceptance Gate after each module:
+8. Implement only after the Document Gate passes for the current module.
+9. Follow the Module Acceptance Gate after each module:
    - Run the module acceptance tests.
    - Fix failures inside the module boundary.
    - Record any contract, architecture, or quality doc updates.
@@ -58,6 +71,8 @@ Coding must follow the module sequence. Implement exactly one module at a time, 
 
 - Read `references/framework-files.md` when creating or reviewing the whole document system.
 - Read `references/discovery-questions.md` when deciding what to ask next.
+- Read `references/discovery-log-template.md` when creating or appending `docs/requirements/DISCOVERY_LOG.md`.
+- Read `references/product-requirements-template.md` when creating or updating `docs/requirements/PRODUCT_REQUIREMENTS.md`.
 - Read `references/conflict-resolution.md` when a user request conflicts with existing docs or contracts.
 - Read `references/module-design-template.md` when writing a domain module design.
 - Read `references/task-card-template.md` when writing a task card.
@@ -67,7 +82,8 @@ Coding must follow the module sequence. Implement exactly one module at a time, 
 
 ## Implementation Mode Rules
 
-- Documents first, code second. If the required design, architecture, task, quality, and context documents are missing, create or complete them before editing product code.
+- Write human-facing project documents in Chinese by default, including design docs, task cards, context packs, quality rules, decision records, conflict reports, and delivery notes.
+- Requirements first, documents second, code third. If the confirmed requirements, design, architecture, task, quality, and context documents are missing, create or complete them before editing product code.
 - Implementation order comes from the module queue in `docs/TASKS.md`. Do not skip ahead unless the user changes the queue.
 - One business domain or one explicit business slice per implementation pass.
 - No context pack, no implementation.

@@ -1,18 +1,19 @@
 # Implementation Loop
 
-Use this before and during implementation. The loop is intentionally strict because most semantic drift happens while coding. The agent must not begin product-code edits until the document gate passes for the current module.
+Use this before and during implementation. The loop is intentionally strict because most semantic drift happens while coding. The agent must not begin product-code edits until confirmed requirements are saved locally and the document gate passes for the current module.
 
 ## Document Gate
 
 Before coding any module, verify that these documents exist and are consistent enough to guide implementation:
 
 1. `AGENTS.md`: execution discipline, conflict rules, and delivery report format.
-2. `docs/design/PROJECT_DESIGN.md`: project goal, non-goals, glossary, global flow, and module index.
-3. `docs/design/modules/<domain>.md`: current module responsibility, non-responsibility, rules, contracts, states, errors, fixtures, and tests.
-4. `docs/ARCHITECTURE.md`: current module's code boundary, dependency direction, and contract locations.
-5. `docs/TASKS.md`: ordered module queue and current module task card.
-6. `docs/QUALITY.md`: acceptance test command or verification scenario for the current module.
-7. `docs/context-packs/<task-or-domain>.md`: precise reading list for the current module.
+2. `docs/requirements/PRODUCT_REQUIREMENTS.md`: confirmed requirements, acceptance criteria, open questions, and assumptions relevant to the current module.
+3. `docs/design/PROJECT_DESIGN.md`: project goal, non-goals, glossary, global flow, and module index.
+4. `docs/design/modules/<domain>.md`: current module responsibility, non-responsibility, rules, contracts, states, errors, fixtures, and tests.
+5. `docs/ARCHITECTURE.md`: current module's code boundary, dependency direction, and contract locations.
+6. `docs/TASKS.md`: ordered module queue and current module task card.
+7. `docs/QUALITY.md`: acceptance test command or verification scenario for the current module.
+8. `docs/context-packs/<task-or-domain>.md`: precise reading list for the current module.
 
 If any item is missing, stop implementation and create or clarify the missing document first.
 
@@ -29,7 +30,7 @@ Implementation must follow the ordered module queue in `docs/TASKS.md`.
 
 1. Select the next module from the ordered module queue.
 2. Verify the Document Gate for that module.
-3. Read the module's context pack and only the referenced docs by default.
+3. Read the module's context pack and only the referenced requirements, docs, and tests by default.
 4. Confirm the task card is complete.
 5. Check whether the user request conflicts with existing docs, contracts, architecture, or tests.
 6. Check whether public contracts are stable.
@@ -44,7 +45,7 @@ Implementation must follow the ordered module queue in `docs/TASKS.md`.
 
 ## Hard Rules
 
-- Documents first, code second.
+- Requirements first, documents second, code third.
 - The ordered module queue controls implementation order.
 - One business domain per implementation pass unless the task explicitly says otherwise.
 - No context pack, no implementation.
